@@ -1,43 +1,38 @@
+# statistik.py
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-import os
+import plotly.express as px
 
-@st.cache_data
-def load_data():
-    csv_path = os.path.join(os.path.dirname(__file__), "data", "NFL_Combined_Recent_100K.csv")
-    df = pd.read_csv(csv_path)
-    df = df[["Player", "Season", "Passing Yards", "Touchdowns"]]
-    df = df.dropna(subset=["Player", "Season"])
-    df["Season"] = df["Season"].astype(int)
-    return df
-
-def get_csv_players():
-    df = load_data()
-    return df["Player"].unique().tolist()
-
-def show_player_details(player_name):
-    st.title("📊 Statistik Musiman Pemain NFL")
-    df = load_data()
-    player_df = df[df["Player"] == player_name].sort_values("Season")
-
-    if player_df.empty:
-        st.warning("Statistik pemain tidak tersedia.")
+def show_player_stats_chart(df, player_name):
+    if player_name not in df['Player'].values:
+        st.warning("Pemain tidak ditemukan.")
         return
 
-    fig, ax = plt.subplots(figsize=(10, 5))
-    sns.lineplot(data=player_df, x="Season", y="Passing Yards", marker="o", label="Passing Yards", ax=ax)
-    sns.lineplot(data=player_df, x="Season", y="Touchdowns", marker="s", label="Touchdowns", ax=ax)
-    ax.set_title(f"Statistik Musiman: {player_name}")
-    ax.set_xlabel("Musim")
-    ax.set_ylabel("Jumlah")
-    ax.legend()
-    ax.grid(True)
-    st.pyplot(fig)
+    player_df = df[df['Player'] == player_name]
 
-    avg_passing = player_df["Passing Yards"].mean()
-    avg_td = player_df["Touchdowns"].mean()
-    st.subheader("🔍 Rata-Rata Statistik")
-    st.metric("Rata-rata Passing Yards", f"{avg_passing:.1f}")
-    st.metric("Rata-rata Touchdowns", f"{avg_td:.1f}")
+    if 'Season' not in player_df.columns:
+        st.error("Kolom 'Season' tidak tersedia dalam dataset.")
+        return
+
+    st.subheader("📈 Statistik Visualisasi per Musim")
+
+    numeric_cols = ['Passing Yards', 'Rushing Yards', 'Receiving Yards', 'Touchdowns']
+    available_stats = [col for col in numeric_cols if col in player_df.columns]
+
+    if not available_stats:
+        st.warning("Tidak ada statistik numerik tersedia untuk divisualisasikan.")
+        return
+
+    selected_stat = st.selectbox("Pilih Statistik yang Ingin Dilihat", available_stats)
+
+    fig = px.line(
+        player_df.sort_values('Season'),
+        x='Season',
+        y=selected_stat,
+        title=f'{selected_stat} per Season untuk {player_name}',
+        markers=True
+    )
+
+    fig.update_layout(template="plotly_white", height=400)
+    st.plotly_chart(fig, use_container_width=True)
+
