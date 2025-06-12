@@ -70,3 +70,4 @@ if uploaded_file:
         st.write(f"Pemain untuk musim {season}:", filtered_season_players)
     else:
         st.write(f"Tidak ada pemain ditemukan untuk musim {season}")
+print ("hello world")
