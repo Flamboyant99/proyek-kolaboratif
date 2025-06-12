@@ -2,7 +2,8 @@
 import streamlit as st
 import pandas as pd
 from detailPlayer import show_player_details
-from statistikPlayer import show_player_stats_chart  # diperbaiki nama modul
+from statistikPlayer import show_player_stats_chart  # Correct module name
+from compare import compare_players  # Import the new comparison functionality
 from search import (
     search_player_by_full_name,
     search_player_by_partial_name,
@@ -40,17 +41,32 @@ if uploaded_file:
 
     st.success("✅ Dataset berhasil dimuat.")
 
-    # Pilih pemain
+    # Pilih pemain untuk melihat detail dan statistik
     players = df['Player'].drop_duplicates().sort_values()
     selected_player = st.selectbox("Pilih Pemain untuk Lihat Detail:", players)
 
     if selected_player:
-        # Tampilkan Detail
+        # Tampilkan Detail Pemain
         show_player_details(df, selected_player)
 
         # Tampilkan Statistik Visualisasi
         show_player_stats_chart(df, selected_player)
 
+    # -------------------- Perbandingan Pemain -------------------- #
+    st.markdown("---")
+    st.subheader("⚔ Perbandingan Pemain")
+
+    # Pilih dua pemain untuk dibandingkan
+    player1 = st.selectbox("Pilih Pemain Pertama untuk Perbandingan:", players)
+    player2 = st.selectbox("Pilih Pemain Kedua untuk Perbandingan:", players)
+
+    if player1 and player2:
+        if player1 != player2:
+            # Bandingkan statistik kedua pemain
+            compare_players(df, player1, player2)
+        else:
+            st.warning("Pilih dua pemain yang berbeda untuk perbandingan.")
+    
     # -------------------- Pencarian dan Filter -------------------- #
     st.markdown("---")
     st.subheader("🔍 Pencarian Pemain Berdasarkan Nama, Posisi, dan Musim")
@@ -90,4 +106,4 @@ if uploaded_file:
             st.warning(f"Tidak ada pemain ditemukan pada musim {selected_season}.")
 
 else:
-    st.info("📁 Silakan upload file CSV berisi data pemain NFL untuk memulai.")
+    st.info("📁 Silakan upload file CSV berisi data pemain NFL untuk memulai.")
