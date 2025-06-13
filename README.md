@@ -16,20 +16,28 @@ Cara Menggunakan:
    - Klik tombol "Browse files" di sidebar untuk mengunggah file data (format .csv atau .xlsx).
    - Dataset akan ditampilkan dalam bentuk tabel di halaman utama.
 
-3. Atur Parameter / Filter:
-   - Di sidebar, pilih parameter seperti rentang tanggal, kolom kategori, atau batas numerik.
-   - Parameter ini digunakan untuk menyaring data sesuai kebutuhan analisis.
+3. menggunakan fitur detail pemain:
+   - pilih pemain yang dinginkan pada bagian kolom pemain   
+   - setelah di pilih otomatis akan muncul di bagian detail pemain
 
-4. Lakukan Analisis:
-   - Klik tombol “Proses” atau “Analisis” (jika tersedia) untuk memulai proses analisis data.
-   - Hasil analisis akan ditampilkan dalam bentuk grafik dan tabel di bawahnya.
+4. menggunakan fitur statistik : 
+   - masuk ke bagian statistik
+   - lalu masukan player yang ingin di cek statistik nya
+   - lalu akan muncuk outputnya secara otomatis
 
-5. Interpretasi Hasil:
-   - Perhatikan grafik batang, garis, atau tabel yang muncul.
-   - Ringkasan statistik, distribusi, dan tren dapat dilihat untuk membantu pengambilan keputusan.
+5. mengguunakan fitur favorite :
+   - Pertama tambahkan dahulu player yang ingin di tambahkan ke favorite di bagian detail pemain
+   - lalu klik add to favorites , maka akan otomatis akan ke save di bagian favorites
+   - jika ingin menghapus tinggal di klik icon silang di sebelah display nama player
 
-6. Unduh Hasil (Opsional):
-   - Jika tersedia, klik tombol "Download CSV" untuk mengunduh data yang telah diproses.
+6. menggunakan fitur search:
+   - untuk menggunakan fitur search pertama tama masuk ke bagian fitur search terkebih dahulu
+   - lalu pilih ingin mencari dengan input apa ada nama, tahun bermain, dan posisi
+   - jika sudah di pilih masukaan input yang ingin di cari . jika sudah ouput akan muncul secara otomatis
+   
+7. menggunakan fitur compare :
+   - untuk menggunakan fitur compare kamu harus menambahkan dua player yang ingin kamu bandingkan
+   - lalu outputnya akan muncul perbandingan antara kedua pemain tersebut .
 
 Catatan Tambahan:
 ------------------
