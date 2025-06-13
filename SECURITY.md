@@ -15,7 +15,7 @@ The following versions are currently being supported with security updates:
 
 To report a security vulnerability, please contact us via:
 
-- **Email**: security@tugascrispbar.app  
+- **Email**: jastinadrian5@gmail.com 
 - **GitHub Issues**: https://github.com/username/tugas-crispbar/issues  
 
 **Please include the following details:**
